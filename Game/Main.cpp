@@ -1,4 +1,5 @@
 #include "engine.h"
+#include <SDL_Image.h>
 #include <iostream>
 #include <SDL.h>
 
@@ -22,14 +23,20 @@ int main(int, char**)
 
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 	//Load up textures
-
+	IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 
 	std::cout << gn::GetFilePath() << std::endl;
 	gn::SetFilePath("../Resources");
 	std::cout << gn::GetFilePath() << std::endl;
 
 	//load surface
+	SDL_Surface* surface = IMG_Load("sf2.png");
 	//create texture
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
+
+
+
 
 	// wait for keyboard enter to exit
 	bool quit = false;
@@ -42,11 +49,12 @@ int main(int, char**)
 			break;
 		}
 
+		SDL_RenderCopy(renderer, texture, NULL, NULL);
 		SDL_RenderPresent(renderer);
+
 	}
 
-
-	std::getchar();
+	IMG_Quit();
 
 	SDL_Quit();
 
