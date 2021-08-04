@@ -1,13 +1,11 @@
 #pragma once
 #include "Engine.h"
+#include "Resource.h"
 #include <map>
 
 
 namespace gn {
-	class Resource {
-	public:
-		virtual bool Load(const std::string& fileName) = 0;
-	};
+
 
 	class ResourceSystem : public System {
 	public:
@@ -16,7 +14,7 @@ namespace gn {
 		void Update(float dt) override {};
 
 		template <typename T>
-		std::shared_ptr<T> Get(const std::string& name);
+		std::shared_ptr<T> Get(const std::string& name, void* data = nullptr);
 
 	private:
 		std::map<std::string, std::shared_ptr<Resource>> resources;
@@ -24,14 +22,14 @@ namespace gn {
 
 
 	template<typename T>
-	inline std::shared_ptr<T> ResourceSystem::Get(const std::string& name)
+	inline std::shared_ptr<T> ResourceSystem::Get(const std::string& name, void* data)
 	{
 		if (resources.find(name) != resources.end()) {
 			return std::dynamic_pointer_cast<T>(resources[name]);
 		}
 		else {
 			std::shared_ptr resource = std::make_shared<T>();
-			resource->Load(name);
+			resource->Load(name, data);
 			resources[name] = resource;
 
 			return resource;

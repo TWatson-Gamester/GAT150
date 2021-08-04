@@ -6,38 +6,17 @@
 int main(int, char**)
 {
 
+	gn::Engine engine;
+	engine.Startup();
 
-	if (SDL_Init(SDL_INIT_VIDEO) != 0)
-	{
-		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
-		return 1;
-	}
-
-	SDL_Window* window = SDL_CreateWindow("GAT150", 100, 100, 800, 600, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
-	if (window == nullptr)
-	{
-		std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
-		SDL_Quit();
-		return 1;
-	}
-
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
-	//Load up textures
-	IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
+	engine.Get<gn::Renderer>()->Create("THE WINDOW WORKS", 800, 600);
 
 	std::cout << gn::GetFilePath() << std::endl;
 	gn::SetFilePath("../Resources");
 	std::cout << gn::GetFilePath() << std::endl;
 
-	//load surface
-	SDL_Surface* surface = IMG_Load("sf2.png");
-	//create texture
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-	SDL_FreeSurface(surface);
-
-
-
-
+	std::shared_ptr<gn::Texture> texture = engine.Get<gn::ResourceSystem>()->Get<gn::Texture>("sf2.png", engine.Get<gn::Renderer>());
+	
 	// wait for keyboard enter to exit
 	bool quit = false;
 	SDL_Event event;
@@ -49,12 +28,24 @@ int main(int, char**)
 			break;
 		}
 
-		SDL_RenderCopy(renderer, texture, NULL, NULL);
-		SDL_RenderPresent(renderer);
+		engine.Get<gn::Renderer>() -> BeginFrame();
+
+		gn::Vector2 position{ 300,400 };
+		engine.Get<gn::Renderer>()->Draw(texture, position);
+
+		engine.Get<gn::Renderer>() -> EndFrame();
+
+	//	for (size_t i = 0; i < 50; i++) {
+	//		SDL_Rect src{ 32, 64, 32, 64 };
+	//		SDL_Rect dest{gn::RandomRangeInt(0,screen.x), gn::RandomRangeInt(0,screen.y), 16, 24};
+	//		SDL_RenderCopy(renderer, texture, &src, &dest);
+
+		//}
+
 
 	}
 
-	IMG_Quit();
+
 
 	SDL_Quit();
 

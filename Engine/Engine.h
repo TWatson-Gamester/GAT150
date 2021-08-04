@@ -14,6 +14,10 @@
 #include "Object/Actor.h"
 #include "Object/Scene.h"
 
+//Graphics
+#include "Graphics/Renderer.h"
+#include "Graphics/Texture.h"
+
 //Framework
 #include "Framework/System.h"
 #include "Framework/EventSystem.h"
