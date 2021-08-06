@@ -10,6 +10,9 @@
 #include "Math/MathUtils.h"
 #include "Math/Transform.h"
 
+//Input
+#include "Input/InputSystem.h"
+
 //Objects
 #include "Object/Actor.h"
 #include "Object/Scene.h"

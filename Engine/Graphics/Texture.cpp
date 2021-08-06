@@ -9,7 +9,7 @@ namespace gn {
 		renderer = static_cast<Renderer*>(data)->renderer;
 
 		SDL_Surface* surface = IMG_Load(name.c_str());
-		if (surface != nullptr) {
+		if (surface == nullptr) {
 			std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 			return false;
 		}
@@ -23,5 +23,12 @@ namespace gn {
 		}
 
 		return true;
+	}
+	Vector2 Texture::GetSize() const
+	{
+		SDL_Point point;
+		SDL_QueryTexture(texture, nullptr, nullptr, &point.x, &point.y);
+
+		return Vector2{ point.x, point.y };
 	}
 }
