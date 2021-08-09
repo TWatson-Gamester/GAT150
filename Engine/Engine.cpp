@@ -14,8 +14,9 @@ namespace gn {
 		std::for_each(systems.begin(), systems.end(), [](auto& system) {system->Shutdown(); });
 	}
 
-	void Engine::Update(float dt){
-		std::for_each(systems.begin(), systems.end(), [dt](auto& system) {system->Update(dt); });
+	void Engine::Update(){
+		time.Tick();
+		std::for_each(systems.begin(), systems.end(), [this](auto& system) {system->Update(time.deltaTime); });
 	}
 	void Engine::Draw(){
 		std::for_each(systems.begin(), systems.end(), [] (auto& system) mutable {

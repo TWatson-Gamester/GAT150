@@ -5,7 +5,8 @@
 namespace gn {
 
 	void Actor::Update(float dt) {
-		transform.rotation += 3;
+		transform.rotation += 180.0f * dt;
+		/*transform.position.x += 100.0f * dt;*/
 		transform.Update();
 		std::for_each(children.begin(), children.end(), [](auto& child) {child->transform.Update(child->parent->transform.matrix); });
 	}
@@ -21,6 +22,6 @@ namespace gn {
 
 	float Actor::GetRadius(){
 
-		return std::max(texture->GetSize().x, texture->GetSize().y) * .5f;
+		return (texture) ? texture->GetSize().Length() * .5f : 0;
 	}
 }

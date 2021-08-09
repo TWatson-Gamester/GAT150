@@ -6,6 +6,8 @@
 int main(int, char**)
 {
 
+	gn::Timer timer;
+
 	gn::Engine engine;
 	engine.Startup();
 
@@ -27,33 +29,30 @@ int main(int, char**)
 	// wait for keyboard enter to exit
 	bool quit = false;
 	SDL_Event event;
+	float quitTime = engine.time.time + 3.0f;
+
 	while (!quit) {
-		SDL_WaitEvent(&event);
+		SDL_PollEvent(&event);
 		switch (event.type) {
-		case SDL_QUIT:
-			quit = true;
-			break;
+			case SDL_QUIT:
+				quit = true;
+				break;
 		}
 
-		engine.Update(0);
+		engine.Update();
 
 		quit = (engine.Get<gn::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == gn::InputSystem::eKeyState::Pressed);
 
-		scene.Update(0);
+		scene.Update(engine.time.deltaTime);
+
+		if (engine.time.time >= quitTime) quit = true;
+		engine.time.timeScale = 50000;
 
 		engine.Get<gn::Renderer>() -> BeginFrame();
 
 		scene.Draw(engine.Get<gn::Renderer>());
 
 		engine.Get<gn::Renderer>() -> EndFrame();
-
-	//	for (size_t i = 0; i < 50; i++) {
-	//		SDL_Rect src{ 32, 64, 32, 64 };
-	//		SDL_Rect dest{gn::RandomRangeInt(0,screen.x), gn::RandomRangeInt(0,screen.y), 16, 24};
-	//		SDL_RenderCopy(renderer, texture, &src, &dest);
-
-		//}
-
 
 	}
 
