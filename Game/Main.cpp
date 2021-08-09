@@ -41,8 +41,16 @@ int main(int, char**)
 
 		engine.Update();
 
-		quit = (engine.Get<gn::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == gn::InputSystem::eKeyState::Pressed);
+		if (engine.Get<gn::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == gn::InputSystem::eKeyState::Pressed){
+			quit = true;
+		}
 
+		if (engine.Get<gn::InputSystem>()->GetButtonState((int)gn::InputSystem::eMouseButton::Right) == gn::InputSystem::eKeyState::Pressed) {
+
+		gn::Vector2 position = engine.Get<gn::InputSystem>()->GetMousePosition();
+		// create particles
+
+		}
 		scene.Update(engine.time.deltaTime);
 
 		if (engine.time.time >= quitTime) quit = true;
@@ -50,6 +58,7 @@ int main(int, char**)
 
 		engine.Get<gn::Renderer>() -> BeginFrame();
 
+		engine.Draw(engine.Get<gn::Renderer>());
 		scene.Draw(engine.Get<gn::Renderer>());
 
 		engine.Get<gn::Renderer>() -> EndFrame();

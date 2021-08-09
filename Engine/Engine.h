@@ -22,6 +22,7 @@
 #include "Object/Scene.h"
 
 //Graphics
+#include "Graphics/ParticleSystem.h"
 #include "Graphics/Renderer.h"
 #include "Graphics/Texture.h"
 
@@ -43,7 +44,7 @@ namespace gn {
 		void Shutdown();
 
 		void Update();
-		void Draw();
+		void Draw(Renderer* renderer);
 
 		template<typename T>
 		T* Get();

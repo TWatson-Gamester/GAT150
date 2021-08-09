@@ -4,9 +4,10 @@ namespace gn {
 	void SeedRandom(unsigned int seed);
 
 	float Random(); // 0 - 1
-	float RandomRange(int min, int max); // min - max
+	float RandomRange(float min, float max); // min - max
 
 	int RandomInt();
+	int RandomInt(int max);
 	int RandomRangeInt(int min, int max);
 
 }
