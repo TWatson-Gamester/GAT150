@@ -7,6 +7,7 @@ namespace gn {
 		systems.push_back(std::make_unique<ResourceSystem>());
 		systems.push_back(std::make_unique<ParticleSystem>());
 		systems.push_back(std::make_unique<InputSystem>());
+		systems.push_back(std::make_unique<AudioSystem>());
 
 		std::for_each(systems.begin(), systems.end(), [](auto& system) {system->Startup(); });
 	}
