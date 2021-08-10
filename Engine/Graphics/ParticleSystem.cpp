@@ -25,7 +25,7 @@ namespace gn {
 	void ParticleSystem::Draw(Renderer* renderer) {
 		for (const Particle& p : particles) {
 			if (p.isActive) {
-
+				renderer->Draw(p.texture, p.position, 0);
 			}
 		}
 	}

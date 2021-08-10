@@ -29,7 +29,7 @@ int main(int, char**)
 	// wait for keyboard enter to exit
 	bool quit = false;
 	SDL_Event event;
-	float quitTime = engine.time.time + 3.0f;
+	float quitTime = engine.time.time + 10.0f;
 
 	while (!quit) {
 		SDL_PollEvent(&event);
@@ -45,10 +45,11 @@ int main(int, char**)
 			quit = true;
 		}
 
-		if (engine.Get<gn::InputSystem>()->GetButtonState((int)gn::InputSystem::eMouseButton::Right) == gn::InputSystem::eKeyState::Pressed) {
+		if (engine.Get<gn::InputSystem>()->GetButtonState((int)gn::InputSystem::eMouseButton::Left) == gn::InputSystem::eKeyState::Pressed) {
 
-		gn::Vector2 position = engine.Get<gn::InputSystem>()->GetMousePosition();
-		// create particles
+			gn::Vector2 position = engine.Get<gn::InputSystem>()->GetMousePosition();
+			//Create Particles
+			scene.engine->Get<gn::ParticleSystem>()->Create(position, 1, 100.0f, engine.Get<gn::ResourceSystem>()->Get<gn::Texture>("particle01.png", engine.Get<gn::Renderer>()), 100);
 
 		}
 		scene.Update(engine.time.deltaTime);
