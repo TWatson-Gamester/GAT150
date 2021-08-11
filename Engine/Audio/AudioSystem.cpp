@@ -1,4 +1,5 @@
 #include "AudioSystem.h"
+#include "Core/Utilities.h"
 
 namespace gn
 {
@@ -29,7 +30,7 @@ namespace gn
 
 	void AudioSystem::AddAudio(const std::string& name, const std::string& filename)
 	{
-		if (sounds.find(name) == sounds.end())
+		if (sounds.find(string_tolower(name)) == sounds.end())
 		{
 			FMOD::Sound* sound{ nullptr };
 			fmodSystem->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);

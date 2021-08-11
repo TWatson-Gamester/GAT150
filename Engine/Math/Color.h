@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <SDL.h>
 
 namespace gn {
 	struct Color {
@@ -20,6 +21,17 @@ namespace gn {
 		Color operator * (float scale) const { return { r * scale, g * scale, b * scale }; }
 
 		operator std::uint32_t() const { return ToRGB(); }
+
+		operator SDL_Color() const{
+
+			SDL_Color color;
+			color.r = static_cast<Uint8>(r * 255);
+			color.g = static_cast<Uint8>(g * 255);
+			color.b = static_cast<Uint8>(b * 255);
+			color.a = 255;
+
+			return color;
+		} 
 		
 		friend std::istream& operator >> (std::istream& stream, Color& c);
 

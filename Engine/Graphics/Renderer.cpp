@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "Math/Vector2.h"
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <iostream>
 
 namespace gn {
@@ -12,10 +13,12 @@ namespace gn {
 			std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		}
 		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
+		TTF_Init();
 	}
 
 	void Renderer::Shutdown(){
 		IMG_Quit();
+		TTF_Quit();
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
 	}

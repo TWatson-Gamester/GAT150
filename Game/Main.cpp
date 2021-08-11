@@ -2,9 +2,12 @@
 #include <SDL_Image.h>
 #include <iostream>
 #include <SDL.h>
+#include <cassert>
 
 int main(int, char**)
 {
+
+	std::cout << __func__ << std::endl;
 
 	gn::Timer timer;
 
@@ -36,6 +39,24 @@ int main(int, char**)
 	SDL_Event event;
 	float quitTime = engine.time.time + 10.0f;
 
+
+
+	// get font from resource system
+	int size = 35;
+	std::shared_ptr<gn::Font> font = engine.Get<gn::ResourceSystem>()->Get<gn::Font>("Fonts/Cats.ttf", &size);
+
+	// create font texture
+	std::shared_ptr<gn::Texture> textTexture = std::make_shared<gn::Texture>(engine.Get<gn::Renderer>());
+	// set font texture with font surface
+	textTexture->Create(font->CreateSurface("Hello World", gn::Color{ 1, 1, 1 }));
+	// add font texture to resource system
+	engine.Get<gn::ResourceSystem>()->Add("textTexture", textTexture);
+
+	
+
+
+
+
 	while (!quit) {
 		SDL_PollEvent(&event);
 		switch (event.type) {
@@ -65,6 +86,11 @@ int main(int, char**)
 		engine.time.timeScale = 10;
 
 		engine.Get<gn::Renderer>() -> BeginFrame();
+
+		// Draw the font texture in the update loop
+		gn::Transform t;
+		t.position = { 400, 300 };
+		engine.Get<gn::Renderer>()->Draw(textTexture, t);
 
 		engine.Draw(engine.Get<gn::Renderer>());
 		scene.Draw(engine.Get<gn::Renderer>());

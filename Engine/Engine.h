@@ -6,6 +6,7 @@
 //Core
 #include "Core/FileSystem.h"
 #include "Core/Timer.h"
+#include "Core/Utilities.h"
 
 //Math
 #include "Math/Vector2.h"
@@ -23,6 +24,7 @@
 
 //Graphics
 #include "Graphics/ParticleSystem.h"
+#include "Graphics/Font.h"
 #include "Graphics/Renderer.h"
 #include "Graphics/Texture.h"
 
