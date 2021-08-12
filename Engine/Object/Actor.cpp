@@ -12,7 +12,8 @@ namespace gn {
 	}
 
 	void Actor::Draw(Renderer* renderer){
-		renderer->Draw(texture, transform);
+		if(texture) renderer->Draw(texture, transform);
+		std::for_each(children.begin(), children.end(), [renderer](auto& child) { child->Draw(renderer); });
 	}
 
 	void Actor::AddChild(std::unique_ptr<Actor> actor){
