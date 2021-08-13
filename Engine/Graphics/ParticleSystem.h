@@ -30,7 +30,7 @@ namespace gn {
 		void Draw(Renderer* renderer) override;
 
 		void Create(const Vector2& position, size_t count, float lifespan, std::shared_ptr<Texture> texture, float speed);
-		void Create(const Vector2& position, size_t count, float lifespan, const std::vector<Color>& colors, float speed, float angle, float angleRange);
+		void Create(const Vector2& position, size_t count, float lifespan, std::shared_ptr<Texture>, float speed, float angle, float angleRange);
 
 	private:
 		std::vector<Particle> particles;

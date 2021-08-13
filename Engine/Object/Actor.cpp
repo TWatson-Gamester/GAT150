@@ -23,6 +23,6 @@ namespace gn {
 
 	float Actor::GetRadius(){
 
-		return (texture) ? texture->GetSize().Length() * .5f : 0;
+		return (texture) ? texture->GetSize().Length() * .5f * transform.scale.x : 0;
 	}
 }

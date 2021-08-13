@@ -1,6 +1,7 @@
 #include "Renderer.h"
 #include "Texture.h"
 #include "Math/Vector2.h"
+#include "Math/MathUtils.h"
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <iostream>
@@ -49,17 +50,30 @@ namespace gn {
 	void Renderer::Draw(std::shared_ptr<gn::Texture> texture, const Transform& transform){
 		Vector2 size = texture->GetSize();
 		size *= transform.scale;
-		SDL_Rect dest{ transform.position.x, transform.position.y, static_cast<int>(size.x), static_cast<int>(size.y) };
 
-		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, transform.rotation, nullptr, SDL_FLIP_NONE);
+		Vector2 newPosition = transform.position - (size * .5f);
+
+		SDL_Rect rect;
+		rect.x = static_cast<int>(newPosition.x);
+		rect.y = static_cast<int>(newPosition.y);
+		rect.w = static_cast<int>(size.x);
+		rect.h = static_cast<int>(size.y);
+
+		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &rect, gn::RadToDeg(transform.rotation), nullptr, SDL_FLIP_NONE);
 	}
 
 	void Renderer::Draw(std::shared_ptr<gn::Texture> texture, const Vector2& position, float angle, const Vector2& scale){
 		Vector2 size = texture->GetSize();
 		size *= scale;
-		SDL_Rect dest{ position.x, position.y, static_cast<int>(size.x), static_cast<int>(size.y) };
+		Vector2 newPosition = position - (size * .5f);
 
-		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, angle, nullptr, SDL_FLIP_HORIZONTAL);
+		SDL_Rect rect;
+		rect.x = static_cast<int>(newPosition.x);
+		rect.y = static_cast<int>(newPosition.y);
+		rect.w = static_cast<int>(size.x);
+		rect.h = static_cast<int>(size.y);
+
+		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &rect, gn::RadToDeg(angle), nullptr, SDL_FLIP_NONE);
 	}
 
 }

@@ -45,7 +45,7 @@ namespace gn {
 		}
 	}
 
-	void ParticleSystem::Create(const Vector2& position, size_t count, float lifespan, const std::vector<Color>& colors, float speed, float angle, float angleRange){
+	void ParticleSystem::Create(const Vector2& position, size_t count, float lifespan, std::shared_ptr<Texture> texture, float speed, float angle, float angleRange){
 		for (size_t i = 0; i < count; i++) {
 			auto p = std::find_if(particles.begin(), particles.end(), Particle::IsNotActive);
 			if (p != particles.end()) {
@@ -53,6 +53,7 @@ namespace gn {
 				p->lifetime = lifespan;
 				p->position = position;
 				p->prevPosition = position;
+				p->texture = texture;
 
 				p->velocity = Vector2::Rotate(gn::Vector2::right, angle) + gn::RandomRange(-angleRange, angleRange) *(speed * Random());
 			}
