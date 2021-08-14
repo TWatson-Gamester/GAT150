@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "Projectile.h"
-//#include "Enemy.h"
+#include "Enemy.h"
 //#include "Asteroid.h"
 #include "Engine.h"
 
@@ -46,9 +46,9 @@ void Player::Update(float dt){
 
 void Player::OnCollision(Actor* actor) {
 
-	/*if (dynamic_cast<Enemy*>(actor) || dynamic_cast<Asteroid*>(actor)) {
+	if (dynamic_cast<Enemy*>(actor) /*|| dynamic_cast<Asteroid*>(actor)*/) {
 		actor->destroy = true;
-		scene->engine->Get<gn::ParticleSystem>()->Create(transform.position, 50, 10.0f, scene->engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("particle02.png", scene->engine->Get<gn::Renderer>()), 100.0f);
+		scene->engine->Get<gn::ParticleSystem>()->Create(transform.position, 10, 1.0f, scene->engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("particle01.png", scene->engine->Get<gn::Renderer>()), 300.0f);
 		scene->engine->Get<gn::AudioSystem>()->PlayAudio("explosion");
 
 		gn::Event event;
@@ -58,14 +58,14 @@ void Player::OnCollision(Actor* actor) {
 	}
 	else if (dynamic_cast<Projectile*>(actor) && actor->tag == "Enemy") {
 		actor->destroy = true;
-		scene->engine->Get<gn::ParticleSystem>()->Create(transform.position, 50, 10.0f, scene->engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("particle02.png", scene->engine->Get<gn::Renderer>()), 100.0f);
+		scene->engine->Get<gn::ParticleSystem>()->Create(transform.position, 10, 1.0f, scene->engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("particle01.png", scene->engine->Get<gn::Renderer>()), 300.0f);
 		scene->engine->Get<gn::AudioSystem>()->PlayAudio("explosion");
 
 		gn::Event event;
 		event.name = "PlayerDead";
 		event.data = std::string("I got Hit");
 		scene->engine->Get<gn::EventSystem>()->Notify(event);
-	}*/
+	}
 }
 
 void Player::Initialize(){
