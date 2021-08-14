@@ -29,6 +29,9 @@
     <ClCompile Include="Actors\Enemy.cpp">
       <Filter>Source Files\Actors</Filter>
     </ClCompile>
+    <ClCompile Include="Actors\Asteroid.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -41,6 +44,9 @@
       <Filter>Source Files\Actors</Filter>
     </ClInclude>
     <ClInclude Include="Actors\Enemy.h">
+      <Filter>Source Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Actors\Asteroid.h">
       <Filter>Source Files\Actors</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 #include "Actors/Player.h"
 #include "Actors/Projectile.h"
 #include "Actors/Enemy.h"
+#include "Actors/Asteroid.h"
 #include <vector>
 
 void Game::Initialize(){
@@ -49,7 +50,7 @@ void Game::Update(){
 		}
 		break;
 	case Game::eState::StartGame:
-		//musicChannel = engine->Get<gn::AudioSystem>()->PlayAudio("Epic", .5f, 1, true);
+		musicChannel = engine->Get<gn::AudioSystem>()->PlayAudio("Epic", .5f, 1, true);
 		score = 0;
 		lives = 3;
 		state = eState::StartLevel;
@@ -60,13 +61,13 @@ void Game::Update(){
 	}
 		break;
 	case Game::eState::Game:
-		if (scene->GetActors<Enemy>().size() == 0 /*&& scene->GetActors<Asteroid>().size() == 0*/) {
+		if (scene->GetActors<Enemy>().size() == 0 && scene->GetActors<Asteroid>().size() == 0) {
 			state = eState::GameOver;
 		}
 		if (stateTimer >= 10) {
 			scene->AddActor(std::make_unique<Enemy>(gn::Transform{ {gn::RandomRange(0,800),gn::RandomRange(0,600) }, gn::RandomRange(0, 800), .2f }, engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("Enemy.png", engine->Get<gn::Renderer>()), 50.0f));
-			/*scene->AddActor(std::make_unique<Asteroid>(gn::Transform{ {gn::RandomRange(0,800),gn::RandomRange(0,600) }, gn::RandomRange(0, 800), 2.0f }, engine->Get<gn::ResourceSystem>()->Get<gn::Shape>("LargeAsteroid.txt"), 10.0f, "Large"));
-			scene->AddActor(std::make_unique<Asteroid>(gn::Transform{ {gn::RandomRange(0,800),gn::RandomRange(0,600) }, gn::RandomRange(0, 800), 2.0f }, engine->Get<gn::ResourceSystem>()->Get<gn::Shape>("LargeAsteroid.txt"), 10.0f, "Large"));*/
+			scene->AddActor(std::make_unique<Asteroid>(gn::Transform{ {gn::RandomRange(0,800),gn::RandomRange(0,600) }, gn::RandomRange(0, 800), .3f }, engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("LargeAsteroid.png", engine->Get<gn::Renderer>()), 10.0f, "Large"));
+			scene->AddActor(std::make_unique<Asteroid>(gn::Transform{ {gn::RandomRange(0,800),gn::RandomRange(0,600) }, gn::RandomRange(0, 800), .3f }, engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("LargeAsteroid.png", engine->Get<gn::Renderer>()), 10.0f, "Large"));
 			stateTimer = 0;
 		}
 		break;
@@ -304,9 +305,9 @@ void Game::UpdateLevelStart(float dt){
 	for (size_t i = 0; i < 2; i++) {
 		scene->AddActor(std::make_unique<Enemy>(gn::Transform{ {gn::RandomRange(0,800),gn::RandomRange(0,600) }, gn::RandomRange(0, 800), .2f }, engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("Enemy.png", engine->Get<gn::Renderer>()), 50.0f));
 	}
-	//for (size_t i = 0; i < 10; i++) {
-	//	scene->AddActor(std::make_unique<Asteroid>(gn::Transform{ {gn::RandomRange(0,800),gn::RandomRange(0,600) }, gn::RandomRange(0, 800), 2.0f }, engine->Get<gn::ResourceSystem>()->Get<gn::Shape>("LargeAsteroid.txt"), 10.0f, "Large"));
-	//}
+	for (size_t i = 0; i < 10; i++) {
+		scene->AddActor(std::make_unique<Asteroid>(gn::Transform{ {gn::RandomRange(0,800),gn::RandomRange(0,600) }, gn::RandomRange(0, 800), .3f }, engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("LargeAsteroid.png", engine->Get<gn::Renderer>()), 10.0f, "Large"));
+	}
 
 	stateTimer = 0;
 	waitTimer = true;	
