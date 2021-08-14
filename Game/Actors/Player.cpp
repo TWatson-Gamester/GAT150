@@ -14,9 +14,9 @@ void Player::Update(float dt){
 
 	//Movement
 	float thrust = 0;
-	if (scene->engine->Get<gn::InputSystem>()->GetKeyState(SDL_SCANCODE_A) == gn::InputSystem::eKeyState::Pressed) transform.rotation += -5 * dt;
-	if (scene->engine->Get<gn::InputSystem>()->GetKeyState(SDL_SCANCODE_D) == gn::InputSystem::eKeyState::Pressed) transform.rotation += 5 * dt;
-	if (scene->engine->Get<gn::InputSystem>()->GetKeyState(SDL_SCANCODE_W) == gn::InputSystem::eKeyState::Pressed) thrust = speed;
+	if (scene->engine->Get<gn::InputSystem>()->GetKeyState(SDL_SCANCODE_A) == gn::InputSystem::eKeyState::Hold) transform.rotation += -5 * dt;
+	if (scene->engine->Get<gn::InputSystem>()->GetKeyState(SDL_SCANCODE_D) == gn::InputSystem::eKeyState::Hold) transform.rotation += 5 * dt;
+	if (scene->engine->Get<gn::InputSystem>()->GetKeyState(SDL_SCANCODE_W) == gn::InputSystem::eKeyState::Hold) thrust = speed;
 
 	gn::Vector2 acceleration = gn::Vector2::Rotate(gn::Vector2::right, transform.rotation) * thrust;
 	gn::Vector2 gravity = (gn::Vector2{ 400,300 } - transform.position).Normalized() * 100;
