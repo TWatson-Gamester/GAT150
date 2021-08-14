@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Actors/Player.h"
+#include "Actors/Projectile.h"
 #include <vector>
 
 void Game::Initialize(){
@@ -56,7 +57,7 @@ void Game::Update(){
 		}
 		break;
 	case Game::eState::StartGame:
-		musicChannel = engine->Get<gn::AudioSystem>()->PlayAudio("Epic", .5f, 1, true);
+		//musicChannel = engine->Get<gn::AudioSystem>()->PlayAudio("Epic", .5f, 1, true);
 		score = 0;
 		lives = 3;
 		state = eState::StartLevel;

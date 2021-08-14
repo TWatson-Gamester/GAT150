@@ -1,5 +1,5 @@
 #include "Player.h"
-//#include "Projectile.h"
+#include "Projectile.h"
 //#include "Enemy.h"
 //#include "Asteroid.h"
 #include "Engine.h"
@@ -36,12 +36,11 @@ void Player::Update(float dt){
 		scene->engine->Get<gn::AudioSystem>()->PlayAudio("Player_Shot");
 		fireTimer = fireRate;
 
-		//Need to make custom shape bullets for both player and enimies
 		gn::Transform t = children[0]->transform;
-		t.scale = .5f;
-		/*std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, scene->engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("PlayerShot", scene->engine->Get<gn::Renderer>()));
+		t.scale = .75f;
+		std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, scene->engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("PlayerShot.png", scene->engine->Get<gn::Renderer>()), 300.0f);
 		projectile->tag = "Player";
-		scene->AddActor(std::move(projectile));*/
+		scene->AddActor(std::move(projectile));
 	}
 }
 
