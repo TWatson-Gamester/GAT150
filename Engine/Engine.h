@@ -32,9 +32,12 @@
 #include "Framework/System.h"
 #include "Framework/EventSystem.h"
 
+//Component
+#include "Component/SpriteComponent.h"
+#include "Component/PhysicsComponent.h"
+
 //Resource
 #include "Resource/ResourceSystem.h"
-
 #include <vector>
 #include <memory>
 #include <algorithm>
