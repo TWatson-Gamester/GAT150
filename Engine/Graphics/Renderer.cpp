@@ -76,4 +76,19 @@ namespace gn {
 		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &rect, gn::RadToDeg(angle), nullptr, SDL_FLIP_NONE);
 	}
 
+	void Renderer::Draw(std::shared_ptr<gn::Texture> texture, const SDL_Rect& source, const Transform& transform){
+		Vector2 size = Vector2{ source.w, source.h };
+		size *= transform.scale;
+
+		Vector2 newPosition = transform.position - (size * .5f);
+
+		SDL_Rect rect;
+		rect.x = static_cast<int>(newPosition.x);
+		rect.y = static_cast<int>(newPosition.y);
+		rect.w = static_cast<int>(size.x);
+		rect.h = static_cast<int>(size.y);
+
+		SDL_RenderCopyEx(renderer, texture->texture, &source, &rect, gn::RadToDeg(transform.rotation), nullptr, SDL_FLIP_NONE);
+	}
+
 }

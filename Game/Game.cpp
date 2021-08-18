@@ -13,17 +13,18 @@ void Game::Initialize(){
 	gn::SeedRandom(static_cast<unsigned int>(time(nullptr)));
 	gn::SetFilePath("../Resources");
 
-	std::unique_ptr<gn::Actor> actor = std::make_unique<gn::Actor>(gn::Transform{ gn::Vector2{400,300}, 0, 5 });
+	std::unique_ptr<gn::Actor> actor = std::make_unique<gn::Actor>(gn::Transform{ gn::Vector2{400,300}, 0, 3 });
 	{
-		std::unique_ptr<gn::SpriteComponent> component = std::make_unique<gn::SpriteComponent>();
-		component->texture = engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("sf2.png", engine->Get<gn::Renderer>());
+		gn::SpriteAnimationComponent* component = actor->AddComponent<gn::SpriteAnimationComponent>();
+		component->texture = engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("Link Sheet.png", engine->Get<gn::Renderer>());
+		component->fps = 30;
+		component->numFramesX = 12;
+		component->numFramesY = 8;
 
-		actor->AddComponent(std::move(component));
 	}
 	{
-		std::unique_ptr<gn::PhysicsComponent> component = std::make_unique<gn::PhysicsComponent>();
-		component->ApplyForce(gn::Vector2::right * 200);
-		actor->AddComponent(std::move(component));
+		gn::PhysicsComponent* component = actor->AddComponent<gn::PhysicsComponent>();
+		//component->ApplyForce(gn::Vector2::right * 200);
 	}
 		scene->AddActor(std::move(actor));
 

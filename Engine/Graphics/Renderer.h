@@ -19,6 +19,7 @@ namespace gn {
 
 		void Draw(std::shared_ptr<gn::Texture> texture, const Transform& transform);
 		void Draw(std::shared_ptr<gn::Texture> texture, const Vector2& position, float angle, const Vector2& scale = Vector2::one);
+		void Draw(std::shared_ptr<gn::Texture> texture, const SDL_Rect& source, const Transform& transform);
 
 		friend class Texture;
 

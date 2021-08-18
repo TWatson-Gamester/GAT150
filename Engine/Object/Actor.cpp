@@ -33,9 +33,4 @@ namespace gn {
 		return 0;
 		//return (texture) ? texture->GetSize().Length() * .5f * transform.scale.x : 0;
 	}
-
-	void Actor::AddComponent(std::unique_ptr<Component> component){
-		component->owner = this;
-		components.push_back(std::move(component));
-	}
 }

@@ -35,6 +35,7 @@
 //Component
 #include "Component/SpriteComponent.h"
 #include "Component/PhysicsComponent.h"
+#include "Component/SpriteAnimationComponent.h"
 
 //Resource
 #include "Resource/ResourceSystem.h"
