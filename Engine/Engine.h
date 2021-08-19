@@ -1,12 +1,16 @@
 #pragma once
 
-//Audio
-#include "Audio/AudioSystem.h"
 
 //Core
 #include "Core/FileSystem.h"
 #include "Core/Timer.h"
 #include "Core/Utilities.h"
+
+//Framework
+#include "Framework/System.h"
+#include "Framework/EventSystem.h"
+#include "Framework/Singleton.h"
+#include "Framework/Factory.h"
 
 //Math
 #include "Math/Vector2.h"
@@ -28,9 +32,8 @@
 #include "Graphics/Renderer.h"
 #include "Graphics/Texture.h"
 
-//Framework
-#include "Framework/System.h"
-#include "Framework/EventSystem.h"
+//Audio
+#include "Audio/AudioSystem.h"
 
 //Component
 #include "Component/SpriteComponent.h"
@@ -44,6 +47,9 @@
 #include <algorithm>
 
 namespace gn {
+
+	using ObjectFactory = Singleton<Factory<std::string, Object>>;
+
 	class Engine {
 	public:
 		void Startup();

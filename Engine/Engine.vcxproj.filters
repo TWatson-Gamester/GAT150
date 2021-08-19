@@ -181,9 +181,6 @@
     <ClInclude Include="Core\Utilities.h">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Source Files\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Component\GraphicComponent.h">
       <Filter>Source Files\Component</Filter>
     </ClInclude>
@@ -194,6 +191,15 @@
       <Filter>Source Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="Component\SpriteAnimationComponent.h">
+      <Filter>Source Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Singleton.h">
+      <Filter>Source Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Factory.h">
+      <Filter>Source Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Component.h">
       <Filter>Source Files\Component</Filter>
     </ClInclude>
   </ItemGroup>
