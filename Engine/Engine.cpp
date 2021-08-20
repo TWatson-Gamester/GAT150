@@ -11,7 +11,9 @@ namespace gn {
 
 		std::for_each(systems.begin(), systems.end(), [](auto& system) {system->Startup(); });
 
-		ObjectFactory::Instance().Register<SpriteAnimationComponent>("SpriteAnimationComponent");
+		REGISTER_CLASS(Actor);
+		REGISTER_CLASS(SpriteAnimationComponent);
+		REGISTER_CLASS(PhysicsComponent);
 	}
 
 	void Engine::Shutdown(){

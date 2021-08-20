@@ -15,10 +15,15 @@ namespace gn {
 			b = ((rgb >> 16) & 0xFF) / 255.0f;	// 0 - 255 -> 0 - 1
 		}
 
+		float operator [] (size_t index) const { return (&r)[index]; } // index == 0 is whatever the x value is, 1 is the y value
+		float& operator [] (size_t index) { return (&r)[index]; }
+
 		Color operator + (const Color color) { return {r + color.r, g + color.g, b + color.b}; }
 		Color operator - (const Color color) { return {r - color.r, g - color.g, b - color.b}; }
 
 		Color operator * (float scale) const { return { r * scale, g * scale, b * scale }; }
+
+		friend std::ostream& operator << (std::ostream& stream, Color& c);
 
 		operator std::uint32_t() const { return ToRGB(); }
 

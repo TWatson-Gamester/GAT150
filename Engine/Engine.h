@@ -1,10 +1,12 @@
 #pragma once
 
+#define REGISTER_CLASS(CLASS) ObjectFactory::Instance().Register<CLASS>(#CLASS);
 
 //Core
 #include "Core/FileSystem.h"
 #include "Core/Timer.h"
 #include "Core/Utilities.h"
+#include "Core/Json.h"
 
 //Framework
 #include "Framework/System.h"
