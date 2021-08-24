@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "Math/Transform.h"
 #include "Component/Component.h"
+#include "Core/Serializable.h"
 #include <vector>
 #include <memory>
 
@@ -11,7 +12,7 @@ namespace gn {
 	class Texture;
 	class Renderer;
 
-	class Actor : public Object {
+	class Actor : public Object, public ISerializable {
 	public:
 		Actor() {};
 		Actor(const Transform& transform) : transform{ transform } {};
@@ -31,6 +32,10 @@ namespace gn {
 		template<class T>
 		T* AddComponent();
 
+		// Inherited via ISerializable
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
+
 	public:
 		bool destroy = false;
 		std::string tag;
@@ -42,6 +47,7 @@ namespace gn {
 		std::vector<std::unique_ptr<Actor>> children;
 
 		std::vector<std::unique_ptr<Component>> components;
+
 	};
 
 	template<class T>

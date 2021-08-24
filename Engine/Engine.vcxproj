@@ -177,6 +177,8 @@
   <ItemGroup>
     <ClCompile Include="Audio\AudioChannel.cpp" />
     <ClCompile Include="Audio\AudioSystem.cpp" />
+    <ClCompile Include="Component\Component.cpp" />
+    <ClCompile Include="Component\GraphicComponent.cpp" />
     <ClCompile Include="Component\PhysicsComponent.cpp" />
     <ClCompile Include="Component\SpriteAnimationComponent.cpp" />
     <ClCompile Include="Component\SpriteComponent.cpp" />
@@ -209,6 +211,7 @@
     <ClInclude Include="Component\SpriteComponent.h" />
     <ClInclude Include="Core\FileSystem.h" />
     <ClInclude Include="Core\Json.h" />
+    <ClInclude Include="Core\Serializable.h" />
     <ClInclude Include="Core\Timer.h" />
     <ClInclude Include="Core\Utilities.h" />
     <ClInclude Include="Engine.h" />
@@ -233,6 +236,9 @@
     <ClInclude Include="Object\Scene.h" />
     <ClInclude Include="Resource\Resource.h" />
     <ClInclude Include="Resource\ResourceSystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Build\Resources\scene.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

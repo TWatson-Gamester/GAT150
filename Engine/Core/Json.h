@@ -4,6 +4,8 @@
 #include "Math/Color.h"
 #include <string>
 
+#define JSON_READ(value, data) gn::json::Get(value, #data, data);
+
 namespace gn
 {
 	namespace json
