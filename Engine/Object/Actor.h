@@ -31,6 +31,8 @@ namespace gn {
 		void AddComponent(std::unique_ptr<Component> component);
 		template<class T>
 		T* AddComponent();
+		template<class T>
+		T* GetComponent();
 
 		// Inherited via ISerializable
 		virtual bool Write(const rapidjson::Value& value) const override;
@@ -58,5 +60,16 @@ namespace gn {
 		components.push_back(std::move(component));
 
 		return dynamic_cast<T*>(components.back().get());
+	}
+	template<class T>
+	inline T* Actor::GetComponent()
+	{
+		std::vector<T*> results;
+		for (auto& component : components) {
+			if (dynamic_cast<T*>(component.get())) {
+				return dynamic_cast<T*>(component.get());
+			}
+		}
+		return nullptr;
 	}
 }

@@ -36,6 +36,9 @@
     <Filter Include="Source Files\Component">
       <UniqueIdentifier>{98338603-615d-4cf8-824a-9d949be80469}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{cdb307c6-e2de-4814-940a-1a982ac62b01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -112,6 +115,12 @@
     </ClCompile>
     <ClCompile Include="Component\GraphicComponent.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\RBPhysicsComponent.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\PhysicsSystem.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +225,12 @@
     </ClInclude>
     <ClInclude Include="Core\Serializable.h">
       <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\RBPhysicsComponent.h">
+      <Filter>Source Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\PhysicsSystem.h">
+      <Filter>Source Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

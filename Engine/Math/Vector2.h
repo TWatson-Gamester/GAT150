@@ -1,4 +1,5 @@
 #pragma once
+#include "box2d/box2d.h"
 #include <cmath>
 #include <iostream>
 
@@ -10,6 +11,7 @@ namespace gn {
 		Vector2(float x) : x{ x }, y{ x } {};
 		Vector2(float x, float y) : x{ x }, y{ y } {}
 		Vector2(int x, int y) : x{ static_cast<float>(x) }, y{ static_cast<float>(y) } {}
+		Vector2(const b2Vec2& v2) : x{ v2.x }, y{ v2.y } {}
 
 		float operator [] (size_t index) const { return (&x)[index]; } // index == 0 is whatever the x value is, 1 is the y value
 		float& operator [] (size_t index) { return (&x)[index]; }
@@ -43,6 +45,8 @@ namespace gn {
 
 		bool operator == (const Vector2& v) const { return (x == v.x && y == v.y); }
 		bool operator != (const Vector2& v) const { return !(x == v.x && y == v.y); }
+
+		operator b2Vec2() const { return b2Vec2{x,y}; }
 
 		friend std::istream& operator >> (std::istream& stream, Vector2& v);
 		friend std::ostream& operator << (std::ostream& stream, Vector2& v);

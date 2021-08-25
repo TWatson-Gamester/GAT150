@@ -1,10 +1,14 @@
 #include "Game.h"
+#include "GameComponent/PlayerComponent.h"
 
 void Game::Initialize(){
 	engine = std::make_unique<gn::Engine>(); //Makes the new Engine
 	engine->Startup();
 
 	engine->Get<gn::Renderer>()->Create("Not Asteroids", 800, 600);
+
+	//Regster Classes
+	REGISTER_CLASS(PlayerComponent);
 
 	scene = std::make_unique<gn::Scene>(); //Makes the Scene
 	scene->engine = engine.get();

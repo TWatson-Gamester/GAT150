@@ -1,6 +1,6 @@
 #pragma once
 
-#define REGISTER_CLASS(CLASS) ObjectFactory::Instance().Register<CLASS>(#CLASS);
+#define REGISTER_CLASS(CLASS) gn::ObjectFactory::Instance().Register<CLASS>(#CLASS);
 
 //Core
 #include "Core/FileSystem.h"
@@ -29,6 +29,9 @@
 #include "Object/Actor.h"
 #include "Object/Scene.h"
 
+//Physics system
+#include "Physics/PhysicsSystem.h"
+
 //Graphics
 #include "Graphics/ParticleSystem.h"
 #include "Graphics/Font.h"
@@ -42,6 +45,7 @@
 #include "Component/SpriteComponent.h"
 #include "Component/PhysicsComponent.h"
 #include "Component/SpriteAnimationComponent.h"
+#include "Component/RBPhysicsComponent.h"
 
 //Resource
 #include "Resource/ResourceSystem.h"

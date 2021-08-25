@@ -39,17 +39,9 @@ namespace gn {
 	bool SpriteAnimationComponent::Read(const rapidjson::Value& value)
 	{
 		SpriteComponent::Read(value);
-		
-		int FPS;
-		JSON_READ(value, FPS);
-		int xFrames;
-		JSON_READ(value, xFrames);
-		int yFrames;
-		JSON_READ(value, yFrames);
-
-		fps = FPS;
-		numFramesX = xFrames;
-		numFramesY = yFrames;
+		JSON_READ(value, fps);
+		JSON_READ(value, numFramesX);
+		JSON_READ(value, numFramesY);
 
 		return true;
 	}
