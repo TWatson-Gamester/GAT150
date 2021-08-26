@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "GameComponent/PlayerComponent.h"
+#include "GameComponent/EnemyComponent.h"
 
 void Game::Initialize(){
 	engine = std::make_unique<gn::Engine>(); //Makes the new Engine
@@ -9,6 +10,7 @@ void Game::Initialize(){
 
 	//Regster Classes
 	REGISTER_CLASS(PlayerComponent);
+	REGISTER_CLASS(EnemyComponent);
 
 	scene = std::make_unique<gn::Scene>(); //Makes the Scene
 	scene->engine = engine.get();

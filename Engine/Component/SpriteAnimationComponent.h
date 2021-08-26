@@ -16,6 +16,8 @@ namespace gn {
 
 	public:
 		int frame = 0;
+		int startFrame = 0;
+		int endFrame = 0;
 		int fps = 0;
 		int numFramesX = 0;
 		int numFramesY = 0;
