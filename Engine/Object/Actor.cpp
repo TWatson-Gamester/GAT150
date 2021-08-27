@@ -23,14 +23,30 @@ namespace gn {
 		std::for_each(children.begin(), children.end(), [renderer](auto& child) { child->Draw(renderer); });
 	}
 
+	void Actor::BeginContact(Actor* other){
+		Event event;
+		event.name = "collision_enter";
+		event.data = other;
+		event.receiver = this;
+
+		scene->engine->Get<EventSystem>()->Notify(event);
+		//std::cout << "begin: " << other->tag << std::endl;
+	}
+
+	void Actor::EndContact(Actor* other){
+		Event event;
+		event.name = "collision_exit";
+		event.data = other;
+		event.receiver = this;
+
+		scene->engine->Get<EventSystem>()->Notify(event);
+		//td::cout << "end: " << other->tag << std::endl;
+
+	}
+
 	void Actor::AddChild(std::unique_ptr<Actor> actor){
 		actor->parent = this;
 		children.push_back(std::move(actor));
-	}
-
-	float Actor::GetRadius(){
-		return 0;
-		//return (texture) ? texture->GetSize().Length() * .5f * transform.scale.x : 0;
 	}
 	
 	void Actor::AddComponent(std::unique_ptr<Component> component){
@@ -58,6 +74,7 @@ namespace gn {
 				if (component) {
 					component->owner = this;
 					component->Read(componentValue);
+					component->Create();
 					AddComponent(std::move(component));
 				}
 			}
