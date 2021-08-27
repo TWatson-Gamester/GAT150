@@ -40,7 +40,13 @@
                   32,
                   32
                ]
+            },
+            {
+	            "type":"AudioComponent",
+	            "soundName":"audio/explosion.wav",
+	            "playOnAwake":true
             }
+
          ]
       },
       {

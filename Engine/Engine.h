@@ -46,6 +46,7 @@
 #include "Component/PhysicsComponent.h"
 #include "Component/SpriteAnimationComponent.h"
 #include "Component/RBPhysicsComponent.h"
+#include "Component/AudioComponent.h"
 
 //Resource
 #include "Resource/ResourceSystem.h"

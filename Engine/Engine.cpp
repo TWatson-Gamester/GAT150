@@ -17,6 +17,7 @@ namespace gn {
 		REGISTER_CLASS(SpriteAnimationComponent);
 		REGISTER_CLASS(PhysicsComponent);
 		REGISTER_CLASS(RBPhysicsComponent);
+		REGISTER_CLASS(AudioComponent);
 	}
 
 	void Engine::Shutdown(){

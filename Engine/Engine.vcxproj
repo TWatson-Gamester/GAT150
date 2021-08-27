@@ -177,6 +177,7 @@
   <ItemGroup>
     <ClCompile Include="Audio\AudioChannel.cpp" />
     <ClCompile Include="Audio\AudioSystem.cpp" />
+    <ClCompile Include="Component\AudioComponent.cpp" />
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\GraphicComponent.cpp" />
     <ClCompile Include="Component\PhysicsComponent.cpp" />
@@ -206,6 +207,7 @@
   <ItemGroup>
     <ClInclude Include="Audio\AudioChannel.h" />
     <ClInclude Include="Audio\AudioSystem.h" />
+    <ClInclude Include="Component\AudioComponent.h" />
     <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\GraphicComponent.h" />
     <ClInclude Include="Component\PhysicsComponent.h" />
