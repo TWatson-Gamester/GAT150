@@ -3,6 +3,12 @@
 
 using namespace gn;
 
+PlayerComponent::~PlayerComponent()
+{
+	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_enter", owner);
+	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_exit", owner);
+}
+
 void PlayerComponent::Update(){
 	Vector2 force = Vector2::zero;
 	if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_A) == InputSystem::eKeyState::Hold) {

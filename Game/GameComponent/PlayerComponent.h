@@ -6,6 +6,8 @@
 class PlayerComponent : public gn::Component {
 public:
 
+	virtual ~PlayerComponent();
+
 	void Create() override;
 	virtual void OnCollisionEnter(const gn::Event& event);
 	virtual void OnCollisionExit(const gn::Event& event);

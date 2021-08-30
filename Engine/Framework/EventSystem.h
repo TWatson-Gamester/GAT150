@@ -24,11 +24,12 @@ namespace gn {
 
 		void Subscribe(const std::string& name, function_t function, Object* receiver = nullptr);
 		void Notify(const Event& event);
+		void Unsubscribe(const std::string& name, Object* receiver);
 		
 	private:
 		struct Observer {
 			function_t function;
-			Object* reciever;
+			Object* receiver;
 		};
 
 	private:

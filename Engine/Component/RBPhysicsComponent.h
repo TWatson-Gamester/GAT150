@@ -5,6 +5,9 @@
 namespace gn {
 	class RBPhysicsComponent : public PhysicsComponent {
 	public:
+
+		virtual ~RBPhysicsComponent();
+
 		void Update() override;
 		void ApplyForce(const Vector2& force) override;
 
