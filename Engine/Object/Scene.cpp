@@ -33,7 +33,6 @@ namespace gn {
 	}
 
 	void Scene::RemoveActor(Actor* actor) {
-
 	}
 
 	void Scene::RemoveAllActors() {

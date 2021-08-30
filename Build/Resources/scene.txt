@@ -18,7 +18,7 @@
          "components":[
             {
                "type":"PlayerComponent",
-               "speed":50
+               "speed":35
             },
             {
                "type":"SpriteAnimationComponent",
@@ -154,6 +154,33 @@
                   1
                ],
                "text":"Hello World!"
+            }
+         ]
+      },
+      {
+         "type":"Actor",
+         "tag":"Pickup",
+         "transform":{
+            "position":[
+               200,
+               510
+            ]
+         },
+         "components":[
+            {
+               "type":"PickupComponent"
+            },
+            {
+               "type":"SpriteAnimationComponent",
+               "textureName":"coin.png",
+               "fps":10,
+               "numFramesX":8,
+               "numFramesY":1
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "data.isDynamic":true,
+               "data.isSensor":true
             }
          ]
       }

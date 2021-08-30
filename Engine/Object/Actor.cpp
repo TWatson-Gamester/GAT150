@@ -29,7 +29,7 @@ namespace gn {
 		event.data = other;
 		event.receiver = this;
 
-		scene->engine->Get<EventSystem>()->Notify(event);
+		if(!destroy) scene->engine->Get<EventSystem>()->Notify(event);
 		//std::cout << "begin: " << other->tag << std::endl;
 	}
 
@@ -39,7 +39,7 @@ namespace gn {
 		event.data = other;
 		event.receiver = this;
 
-		scene->engine->Get<EventSystem>()->Notify(event);
+		if(!destroy) scene->engine->Get<EventSystem>()->Notify(event);
 		//td::cout << "end: " << other->tag << std::endl;
 
 	}

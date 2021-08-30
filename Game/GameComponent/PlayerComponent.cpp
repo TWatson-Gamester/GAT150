@@ -40,6 +40,7 @@ void PlayerComponent::Create(){
 	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_exit", std::bind(&PlayerComponent::OnCollisionExit, this, std::placeholders::_1), owner);
 
 	owner->scene->engine->Get<AudioSystem>()->AddAudio("hurt", "audio/hurt.wav");
+	owner->scene->engine->Get<AudioSystem>()->AddAudio("coin", "audio/coin.wav");
 }
 
 void PlayerComponent::OnCollisionEnter(const Event& event) {
@@ -54,7 +55,12 @@ void PlayerComponent::OnCollisionEnter(const Event& event) {
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("hurt");
 	}
 
-	std::cout << actor->tag << std::endl;
+	if (iString_Compate(actor->tag, "pickup")) {
+		owner->scene->engine->Get<AudioSystem>()->PlayAudio("coin");
+		actor->destroy = true;
+	}
+
+	std::cout << "Enter: " << actor->tag << std::endl;
 }
 
 void PlayerComponent::OnCollisionExit(const Event& event) {
@@ -64,6 +70,9 @@ void PlayerComponent::OnCollisionExit(const Event& event) {
 	if (iString_Compate(actor->tag, "ground")) {
 		contacts.remove(actor);
 	}
+
+	//std::cout << "Exit: " << actor->tag << std::endl;
+
 }
 
 bool PlayerComponent::Write(const rapidjson::Value& value) const{
