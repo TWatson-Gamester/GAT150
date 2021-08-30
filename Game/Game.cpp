@@ -23,23 +23,11 @@ void Game::Initialize(){
 	assert(success);
 
 	scene->Read(document);
-
-	//std::unique_ptr<gn::Actor> actor = std::make_unique<gn::Actor>(gn::Transform{ gn::Vector2{400,300}, 0, 3 });
-	//{
-	//	auto component = gn::ObjectFactory::Instance().Create<gn::SpriteAnimationComponent>("SpriteAnimationComponent");
-	//	component->texture = engine->Get<gn::ResourceSystem>()->Get<gn::Texture>("Link Sheet.png", engine->Get<gn::Renderer>());
-	//	component->fps = 60;
-	//	component->numFramesX = 12;
-	//	component->numFramesY = 8;
-	//	actor->AddComponent(std::move(component));
-
-	//}
-	//{
-	//	//gn::PhysicsComponent* component = actor->AddComponent<gn::PhysicsComponent>();
-	//	//component->ApplyForce(gn::Vector2::right * 200);
-	//}
-	//	scene->AddActor(std::move(actor));
-
+	for (size_t i = 0; i < 10; i++) {
+		auto actor = gn::ObjectFactory::Instance().Create<gn::Actor>("Coin");
+		actor->transform.position = gn::Vector2{ gn::RandomRange(0,800), gn::RandomRange(400,500) };
+		scene->AddActor(std::move(actor));
+	}
 }
 
 void Game::Shutdown(){

@@ -4,7 +4,11 @@
 
 class PickupComponent : public gn::Component {
 
+public:
 	virtual ~PickupComponent();
+
+	std::unique_ptr<Object> Clone() const { return std::make_unique<PickupComponent>(*this); }
+
 
 	// Inherited via Component
 	virtual bool Write(const rapidjson::Value& value) const override;
