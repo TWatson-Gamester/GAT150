@@ -23,6 +23,16 @@ void Game::Initialize(){
 	assert(success);
 
 	scene->Read(document);
+
+	gn::TileMap tilemap;
+	tilemap.scene = scene.get();
+	success = gn::json::Load("map.txt", document);
+	assert(success);
+
+	tilemap.Read(document);
+	tilemap.Create();
+
+
 	for (size_t i = 0; i < 10; i++) {
 		auto actor = gn::ObjectFactory::Instance().Create<gn::Actor>("Coin");
 		actor->transform.position = gn::Vector2{ gn::RandomRange(0,800), gn::RandomRange(400,500) };

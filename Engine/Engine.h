@@ -28,6 +28,7 @@
 //Objects
 #include "Object/Actor.h"
 #include "Object/Scene.h"
+#include "Object/TileMap.h"
 
 //Physics system
 #include "Physics/PhysicsSystem.h"
