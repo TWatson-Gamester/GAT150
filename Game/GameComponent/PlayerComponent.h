@@ -22,6 +22,7 @@ public:
 
 public:
 	float speed{ 0 };
+	float jump = 0;
 
 private:
 	std::list<gn::Actor*> contacts;

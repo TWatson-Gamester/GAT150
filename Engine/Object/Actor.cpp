@@ -19,6 +19,10 @@ namespace gn {
 
 	void Actor::Update(float dt) {
 
+		if (!active) {
+			return;
+		}
+
 		std::for_each(components.begin(), components.end(), [](auto& component) { component->Update(); });
 
 		transform.Update();
@@ -26,6 +30,10 @@ namespace gn {
 	}
 
 	void Actor::Draw(Renderer* renderer){
+
+		if (!active) {
+			return;
+		}
 
 		std::for_each(components.begin(), components.end(), [renderer](auto& component) {
 			if (dynamic_cast<GraphicComponent*>(component.get())) {

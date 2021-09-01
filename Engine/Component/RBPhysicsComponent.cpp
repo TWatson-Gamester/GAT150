@@ -2,6 +2,9 @@
 #include "Engine.h"
 
 namespace gn{
+	RBPhysicsComponent::RBPhysicsComponent(const RBPhysicsComponent& other){
+		data = other.data;
+	}
 
 	RBPhysicsComponent::~RBPhysicsComponent()
 	{

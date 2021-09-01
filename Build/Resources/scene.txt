@@ -4,6 +4,7 @@
          "type":"Actor",
          "name":"Player",
          "tag":"Player",
+         "prototype":true,
          "transform":{
             "position":[
                400,
@@ -18,7 +19,8 @@
          "components":[
             {
                "type":"PlayerComponent",
-               "speed":35
+               "speed":35,
+               "jump":200
             },
             {
                "type":"SpriteAnimationComponent",
@@ -110,33 +112,8 @@
       },
       {
          "type":"Actor",
-         "tag":"Ground",
-         "transform":{
-            "position":[
-               400,
-               550
-            ]
-         },
-         "components":[
-            {
-               "type":"SpriteComponent",
-               "textureName":"ground.png"
-            },
-            {
-               "type":"RBPhysicsComponent",
-               "data.isDynamic":false,
-               "data.density":1,
-               "data.size":[
-                  800,
-                  20
-               ]
-            }
-         ]
-      },
-      {
-         "type":"Actor",
          "name":"tile01",
-         "tag":"Ground",
+         "tag":"ground",
          "prototype":true,
          "transform":{
             "scale":[
@@ -149,8 +126,8 @@
                "type":"SpriteComponent",
                "textureName":"tileset2_32x32.png",
                "rect":[
-                  265,
-                  96,
+                  384,
+                  448,
                   32,
                   32
                ]
@@ -201,29 +178,6 @@
       },
       {
          "type":"Actor",
-         "name":"Score",
-         "transform":{
-            "position":[
-               60,
-               20
-            ]
-         },
-         "components":[
-            {
-               "type":"TextComponent",
-               "fontName":"fonts/Cats.ttf",
-               "fontSize":16,
-               "color":[
-                  1,
-                  1,
-                  1
-               ],
-               "text":"Hello World!"
-            }
-         ]
-      },
-      {
-         "type":"Actor",
          "prototype":true,
          "name":"Coin",
          "tag":"Pickup",
@@ -247,7 +201,15 @@
             {
                "type":"RBPhysicsComponent",
                "data.isDynamic":false,
-               "data.isSensor":true
+               "data.isSensor":true,
+               "data.density":2,
+               "data.lockAngle":true,
+               "data.restitution":0.1,
+               "data.gravityScale":1,
+               "data.size":[
+                  16,
+                  16
+               ]
             }
          ]
       }

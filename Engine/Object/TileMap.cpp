@@ -3,14 +3,14 @@
 
 namespace gn {
 	void TileMap::Create(){
-		for (size_t i = 0; i < tiles.size(); i++) {
+		for (int i = 0; i < tiles.size(); i++) {
 			int index = tiles[i];
 			if (index == 0) continue;
 
 			auto actor = ObjectFactory::Instance().Create<Actor>(tilenames[index]);
 			if (actor) {
 				int x = i % numTilesX;
-				int y = i / numTilesY;
+				int y = i / numTilesX;
 				actor->transform.position = start + (gn::Vector2{ x, y } * size);
 				scene->AddActor(std::move(actor));
 			}

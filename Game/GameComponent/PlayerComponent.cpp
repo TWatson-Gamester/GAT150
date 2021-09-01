@@ -18,7 +18,7 @@ void PlayerComponent::Update(){
 		force.x += speed;
 	}
 	if (contacts.size() > 0 && owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == InputSystem::eKeyState::Hold) {
-		force.y -= 200;
+		force.y -= jump;
 	}
 
 	PhysicsComponent* physicsComponent = owner->GetComponent<PhysicsComponent>();
@@ -64,6 +64,11 @@ void PlayerComponent::OnCollisionEnter(const Event& event) {
 	if (iString_Compate(actor->tag, "pickup")) {
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("coin");
 		actor->destroy = true;
+
+		Event event;
+		event.name = "add_score";
+		event.data = 10;
+		owner->scene->engine->Get<EventSystem>()->Notify(event);
 	}
 
 	std::cout << "Enter: " << actor->tag << std::endl;
@@ -87,5 +92,6 @@ bool PlayerComponent::Write(const rapidjson::Value& value) const{
 
 bool PlayerComponent::Read(const rapidjson::Value& value){
 	JSON_READ(value, speed);
+	JSON_READ(value, jump);
 	return true;
 }
