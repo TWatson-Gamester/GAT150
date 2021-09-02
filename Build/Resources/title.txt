@@ -59,7 +59,30 @@
                   0,
                   0
                ],
-               "text":"Cloud Jumper #2"
+               "text":"Coin Collector 8999"
+            }
+         ]
+      },
+      {
+         "type":"Actor",
+         "name":"Lives",
+         "transform":{
+            "position":[
+               740,
+               20
+            ]
+         },
+         "components":[
+            {
+               "type":"TextComponent",
+               "fontName":"fonts/00TT.ttf",
+               "fontSize":30,
+               "color":[
+                  0,
+                  0,
+                  0
+               ],
+               "text":"Lives: 3"
             }
          ]
       }

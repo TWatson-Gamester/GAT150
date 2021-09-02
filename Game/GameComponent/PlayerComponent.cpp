@@ -10,32 +10,34 @@ PlayerComponent::~PlayerComponent()
 }
 
 void PlayerComponent::Update(){
-	Vector2 force = Vector2::zero;
-	if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_A) == InputSystem::eKeyState::Hold) {
-		force.x -= speed;
-	}
-	if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_D) == InputSystem::eKeyState::Hold) {
-		force.x += speed;
-	}
-	if (contacts.size() > 0 && owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == InputSystem::eKeyState::Hold) {
-		force.y -= jump;
-	}
+	if (owner->active) {
+		Vector2 force = Vector2::zero;
+		if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_A) == InputSystem::eKeyState::Hold) {
+			force.x -= speed;
+		}
+		if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_D) == InputSystem::eKeyState::Hold) {
+			force.x += speed;
+		}
+		if (contacts.size() > 0 && owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == InputSystem::eKeyState::Hold) {
+			force.y -= jump;
+		}
 
-	PhysicsComponent* physicsComponent = owner->GetComponent<PhysicsComponent>();
-	assert(physicsComponent);
+		PhysicsComponent* physicsComponent = owner->GetComponent<PhysicsComponent>();
+		assert(physicsComponent);
 
-	physicsComponent->ApplyForce(force);
+		physicsComponent->ApplyForce(force);
 
-	SpriteAnimationComponent* spriteAnimationComponent = owner->GetComponent<SpriteAnimationComponent>();
-	assert(spriteAnimationComponent);
-	if (physicsComponent->velocity.x > 0) {
-		spriteAnimationComponent->StartSequence("walk_right");
-	}
-	else if(physicsComponent->velocity.x < 0){
-		spriteAnimationComponent->StartSequence("walk_left");
-	}
-	else {
-		spriteAnimationComponent->StartSequence("idle");
+		SpriteAnimationComponent* spriteAnimationComponent = owner->GetComponent<SpriteAnimationComponent>();
+		assert(spriteAnimationComponent);
+		if (physicsComponent->velocity.x > 0) {
+			spriteAnimationComponent->StartSequence("walk_right");
+		}
+		else if (physicsComponent->velocity.x < 0) {
+			spriteAnimationComponent->StartSequence("walk_left");
+		}
+		else {
+			spriteAnimationComponent->StartSequence("idle");
+		}
 	}
 }
 
@@ -59,6 +61,11 @@ void PlayerComponent::OnCollisionEnter(const Event& event) {
 
 	if (iString_Compate(actor->tag, "enemy")) {
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("hurt");
+
+		Event event;
+		event.name = "player_hit";
+		event.data = true;
+		owner->scene->engine->Get<EventSystem>()->Notify(event);
 	}
 
 	if (iString_Compate(actor->tag, "pickup")) {
@@ -71,7 +78,7 @@ void PlayerComponent::OnCollisionEnter(const Event& event) {
 		owner->scene->engine->Get<EventSystem>()->Notify(event);
 	}
 
-	std::cout << "Enter: " << actor->tag << std::endl;
+	//std::cout << "Enter: " << actor->tag << std::endl;
 }
 
 void PlayerComponent::OnCollisionExit(const Event& event) {

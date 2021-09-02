@@ -23,6 +23,7 @@ public:
 	void Draw();
 
 	void OnAddScore(const gn::Event& event);
+	void OnPlayerHit(const gn::Event& event);
 
 	void Reset();
 	void Title();
@@ -39,7 +40,8 @@ public:
 private:
 	bool quit = false;
 	eState state = eState::Reset;
-	int score = 0; 
+	int score = 0;
+	int lives = 0;
 	float stateTimer = 0;
 	float spawnTimer = 0;
 };

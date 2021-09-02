@@ -1,12 +1,13 @@
 #include "Game.h"
 #include "GameComponent/PlayerComponent.h"
 #include "GameComponent/EnemyComponent.h"
+#include "Audio/AudioSystem.h"
 
 void Game::Initialize(){
 	engine = std::make_unique<gn::Engine>(); //Makes the new Engine
 	engine->Startup();
 
-	engine->Get<gn::Renderer>()->Create("Not Asteroids", 800, 600);
+	engine->Get<gn::Renderer>()->Create("Coin_Collector_8999", 800, 600);
 
 	//Regster Classes
 	REGISTER_CLASS(PlayerComponent);
@@ -19,6 +20,7 @@ void Game::Initialize(){
 	gn::SetFilePath("../Resources");
 
 	engine->Get<gn::EventSystem>()->Subscribe("add_score", std::bind(&Game::OnAddScore, this, std::placeholders::_1));
+	engine->Get<gn::EventSystem>()->Subscribe("player_hit", std::bind(&Game::OnPlayerHit, this, std::placeholders::_1));
 
 }
 
@@ -30,6 +32,7 @@ void Game::Shutdown(){
 void Game::Update(){
 
 	engine->Update();
+	stateTimer += scene->engine->time.deltaTime;
 
 	if (engine->Get<gn::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == gn::InputSystem::eKeyState::Pressed) {
 		quit = true;
@@ -67,6 +70,11 @@ void Game::Update(){
 	if (scoreActor) {
 		scoreActor->GetComponent<gn::TextComponent>()->SetText("Score: " + std::to_string(score));
 	}
+	auto livesActor = scene->FindActor("Lives");
+	if (livesActor) {
+		livesActor->GetComponent<gn::TextComponent>()->SetText("Lives: " + std::to_string(lives));
+
+	}
 
 	scene->Update(engine->time.deltaTime);
 }
@@ -84,6 +92,10 @@ void Game::Draw(){
 
 void Game::OnAddScore(const gn::Event& event){
 	score += std::get<int>(event.data);
+}
+
+void Game::OnPlayerHit(const gn::Event& event){
+ 	lives--;
 }
 
 void Game::Reset(){
@@ -123,11 +135,12 @@ void Game::StartGame(){
 	tilemap.Read(document);
 	tilemap.Create();
 
-	for (size_t i = 0; i < 10; i++) {
-		auto actor = gn::ObjectFactory::Instance().Create<gn::Actor>("Coin");
-		actor->transform.position = gn::Vector2{ gn::RandomRange(0,800), gn::RandomRange(400,500) };
-		scene->AddActor(std::move(actor));
-	}
+	auto actor = gn::ObjectFactory::Instance().Create<gn::Actor>("Coin");
+	actor->transform.position = gn::Vector2{ gn::RandomRange(150,650), gn::RandomRange(200,400) };
+	scene->AddActor(std::move(actor));
+
+	lives = 3;
+	score = 0;
 
 	state = eState::StartLevel;
 	stateTimer = 0;
@@ -149,16 +162,33 @@ void Game::Level(){
 	spawnTimer -= engine->time.deltaTime;
 	if (spawnTimer <= 0) {
 		auto actor = gn::ObjectFactory::Instance().Create<gn::Actor>("Coin");
-		actor->transform.position = gn::Vector2{ gn::RandomRange(0,800), gn::RandomRange(400,500) };
+		actor->transform.position = gn::Vector2{ gn::RandomRange(150,650), gn::RandomRange(200,400) };
 		scene->AddActor(std::move(actor));
 		spawnTimer = 2;
+	}
+	if (lives <= 0) {
+		state = eState::PlayerDead;
+		stateTimer = 0;
 	}
 }
 
 void Game::PlayerDead(){
-
+	auto player = scene->FindActor("Player");
+	if (player) {
+		player->destroy = true;
+		player->active = false;
+		player = scene->FindActor("Title");
+		player->active = true;
+		player->GetComponent<gn::TextComponent>()->SetText("GAME OVER");
+		
+	}
+	if (stateTimer >= 3) {
+		stateTimer = 0;
+		state = eState::GameOver;
+	}
 }
 
 void Game::GameOver(){
-
+	scene->RemoveAllActors();
+	state = eState::Reset;
 }

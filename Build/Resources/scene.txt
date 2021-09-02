@@ -160,7 +160,7 @@
                "textureName":"tileset2_32x32.png",
                "rect":[
                   32,
-                  128,
+                  352,
                   32,
                   32
                ]
@@ -200,12 +200,12 @@
             },
             {
                "type":"RBPhysicsComponent",
-               "data.isDynamic":false,
+               "data.isDynamic":true,
                "data.isSensor":true,
                "data.density":2,
                "data.lockAngle":true,
-               "data.restitution":0.1,
-               "data.gravityScale":1,
+               "data.restitution":1,
+               "data.gravityScale":0.3,
                "data.size":[
                   16,
                   16
